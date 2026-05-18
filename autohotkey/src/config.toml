@@ -1,0 +1,7 @@
+# Keyboard configuration
+# Add excluded keyboard IDs via tray menu > "Register Excluded Keyboard..."
+
+layout = "US"  # "US" or "JIS"
+excluded = [
+    #"VID_0000&PID_0000",
+]
