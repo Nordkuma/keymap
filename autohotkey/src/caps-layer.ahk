@@ -36,16 +36,17 @@ CapsLock:: return
 F24:: return
 #HotIf
 
+#HotIf IsUSLayerActive()
+; Backquote keydown event of CapsLock layer
+`:: SendText '``'
+#HotIf
+
 #HotIf IsUSLayout()
 ; Backquote keydown event
 `:: Send '{Escape}'
 #HotIf
 
 ; CapsLock layer
-#HotIf IsUSLayerActive()
-`:: SendText '``'
-#HotIf
-
 #HotIf IsLayerActive()
 ; 5th row
 1:: Send '{F1}'
