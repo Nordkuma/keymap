@@ -27,7 +27,7 @@ Right-click the tray icon to access the following options:
 | ----------------------------- | ------------------------------------------------------ |
 | Layout: US / Layout: JIS      | Switch the active keyboard layout                      |
 | Register Excluded Keyboard... | Press any key on a keyboard to register it as excluded |
-| Show Devices                  | List all connected devices                             |
+| Show Connected Devices        | List all connected devices                             |
 
 ## Configuration
 Settings are stored in `config.toml` in `%USERPROFILE%\AutoHotkey`:
@@ -39,29 +39,35 @@ excluded = [
 ]
 ```
 
-| Key        | Description                                                                 |
-| ---------- | --------------------------------------------------------------------------- |
-| `layout`   | Keyboard layout. Affects the layer trigger key and layout-specific hotkeys. |
-| `excluded` | Device IDs of keyboards that suspend remapping when connected.              |
+| Key        | Description                                                    |
+| ---------- | -------------------------------------------------------------- |
+| `layout`   | Keyboard layout. Affects layout-specific hotkeys.              |
+| `excluded` | Device IDs of keyboards that suspend remapping when connected. |
 
 ## Features
 
+### Esc key
+The key to the left of `1` sends `Esc`.
+
+| Layout | Key                 | Action                             |
+| ------ | ------------------- | ---------------------------------- |
+| US     | `` ` ``             | `Esc` (outside the CapsLock layer) |
+| JIS    | `Hankaku / Zenkaku` | `Esc` (always)                     |
+
 ### CapsLock layer
-Hold CapsLock (US) or F24 (JIS) to activate a layer of shortcuts.
+Hold CapsLock to activate a layer of shortcuts.
 
-| Key                   | Action                   |
-| --------------------- | ------------------------ |
-| `Space`               | `Esc`                    |
-| `Backspace`           | `Delete`                 |
-| `1`–`0`, `-`, `=`    | `F1`–`F12`              |
-| `H` / `J` / `K` / `L` | `←` / `↓` / `↑` / `→`|
-| `Y` / `O`             | `Home` / `End`           |
-| `I` / `U`             | `Ctrl+Home` / `Ctrl+End` |
-| `M` / `,`             | `PgDn` / `PgUp`          |
-| `` ` ``               | `` ` `` (US only)        |
-| Most other keys       | `Ctrl`+key               |
-
-Outside the layer, `` ` `` sends `Esc` on US layout.
+| Key                                 | Action                    |
+| ----------------------------------- | ------------------------- |
+| `` ` `` (US)                        | `` ` `` (text)            |
+| `1`–`0`, `-`, `=` (US) / `^` (JIS) | `F1`–`F12`               |
+| `Backspace`                         | `Del`                     |
+| `H` / `J` / `K` / `L`               | `←` / `↓` / `↑` / `→` |
+| `Y` / `O`                           | `Home` / `End`            |
+| `U` / `I`                           | `Ctrl+End` / `Ctrl+Home`  |
+| `M` / `,`                           | `PgDn` / `PgUp`           |
+| `Space`                             | `Esc`                     |
+| Most other keys                     | `Ctrl` + key              |
 
 ### Alt IME control
 Tapping Alt switches the IME state.
