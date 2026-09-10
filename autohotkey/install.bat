@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set SOURCE_DIR=%CD%\src
+set SOURCE_DIR=%~dp0src
 set DEST_DIR=%USERPROFILE%\AutoHotkey
 
 if not exist "%DEST_DIR%" (
