@@ -26,9 +26,13 @@ _Config_Init() {
 _LoadConfig() {
     global g_configPath, g_excludedIDs, g_layout
     g_excludedIDs := _ReadTomlStringArray(g_configPath, '', 'excluded')
-    layout := _ReadTomlString(g_configPath, 'layout')
-    if layout != ''
-        g_layout := StrUpper(layout)
+    layout := StrUpper(_ReadTomlString(g_configPath, 'layout'))
+    if layout = 'US' || layout = 'JIS'
+        g_layout := layout
+    else if layout != '' {
+        g_layout := 'US'
+        TrayTip 'Invalid layout "' layout '" in config.toml', 'Falling back to "US"', 16
+    }
     _UpdateLayoutMenu()
 }
 
