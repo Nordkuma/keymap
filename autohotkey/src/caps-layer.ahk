@@ -1,54 +1,7 @@
 #Requires AutoHotkey v2.0
 
-SetCapsLockState 'AlwaysOff'
-
-IsLayerActive() {
-    global g_layout
-    return (g_layout = 'US' && GetKeyState('CapsLock', 'P'))
-    || (g_layout = 'JIS' && GetKeyState('F24', 'P'))
-}
-
-IsUSLayout() {
-    global g_layout
-    return g_layout = 'US'
-}
-
-IsJISLayout() {
-    global g_layout
-    return g_layout = 'JIS'
-}
-
-IsUSLayerActive() {
-    global g_layout
-    return g_layout = 'US' && GetKeyState('CapsLock', 'P')
-}
-
-IsJISLayerActive() {
-    global g_layout
-    return g_layout = 'JIS' && GetKeyState('F24', 'P')
-}
-
-; CapsLock keydown event
-CapsLock:: return
-
-#HotIf IsJISLayout()
-; F24 keydown event
-F24:: return
-#HotIf
-
-#HotIf IsUSLayerActive()
-; Backquote keydown event of CapsLock layer
-`:: SendText '``'
-#HotIf
-
-#HotIf IsUSLayout()
-; Backquote keydown event
-`:: Send '{Escape}'
-#HotIf
-
-; CapsLock layer
 #HotIf IsLayerActive()
-; 5th row
+; Number row
 1:: Send '{F1}'
 2:: Send '{F2}'
 3:: Send '{F3}'
@@ -60,9 +13,9 @@ F24:: return
 9:: Send '{F9}'
 0:: Send '{F10}'
 -:: Send '{F11}'
-=:: Send '{F12}'
-BackSpace:: Send '{Delete}'
-; 4th row
+sc00D:: Send '{F12}' ; "=" (US) / "^" (JIS)
+Backspace:: Send '{Del}'
+; Top row (QWERTY)
 q:: Send '^q'
 w:: Send '^w'
 e:: Send '^e'
@@ -75,7 +28,7 @@ o:: Send '{End}'
 p:: Send '^p'
 [:: Send '^['
 ]:: Send '^]'
-; 3rd row
+; Home row (ASDF)
 a:: Send '^a'
 s:: Send '^s'
 d:: Send '^d'
@@ -86,7 +39,7 @@ j:: Send '{Down}'
 k:: Send '{Up}'
 l:: Send '{Right}'
 Enter:: Send '^{Enter}'
-; 2nd row
+; Bottom row (ZXCV)
 z:: Send '^z'
 x:: Send '^x'
 c:: Send '^c'
@@ -96,6 +49,6 @@ n:: Send '^n'
 m:: Send '{PgDn}'
 ,:: Send '{PgUp}'
 /:: Send '^/'
-; 1st row
-Space:: Send '{Escape}'
+; Space row
+Space:: Send '{Esc}'
 #HotIf
