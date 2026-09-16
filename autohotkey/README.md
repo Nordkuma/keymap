@@ -83,6 +83,8 @@ The script also accepts IME commands from the [`ime`](../ime/README.md) CLI tool
 When any keyboard in `excluded` is connected, all hotkey remapping is suspended automatically.
 This is useful for keyboards with firmware-level remapping (e.g. QMK/VIA).
 
+While suspended, `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the IME does not switch to katakana input mode.
+
 Use **Register Excluded Keyboard...** in the tray menu to detect and register a keyboard interactively.
 
 ## JIS layout

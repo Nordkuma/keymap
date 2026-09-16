@@ -65,3 +65,10 @@ IMECtlMessage(wParam, lParam, msg, hwnd) {
     if A_PriorHotkey == '*RAlt' && (A_PriorKey == 'RAlt' || A_PriorKey == '')
         SetIME(1)
 }
+
+; Suppress katakana mode while suspended
+#SuspendExempt
+#HotIf A_IsSuspended
++vk16:: Send '{vk16}' ; Shift + VK_IME_ON
+#HotIf
+#SuspendExempt False
