@@ -46,25 +46,25 @@ IMECtlMessage(wParam, lParam, msg, hwnd) {
     }
 }
 
-; Alt keydown events
-*LAlt:: {
-    Send '{Blind}{LAlt down}{vkE8}'
-}
-*RAlt:: {
-    Send '{Blind}{RAlt down}{vkE8}'
+; Press Alt
+AltDown(alt) {
+    Send '{Blind}{' alt ' down}{vkE8}'
 }
 
+; Release Alt and set IME state on tap
+AltUp(key, alt, ime) {
+    Send '{Blind}{' alt ' up}'
+    if A_PriorHotkey = '*' key && (A_PriorKey = GetKeyName(key) || A_PriorKey == '')
+        SetIME(ime)
+}
+
+; Alt keydown events
+*LAlt:: AltDown('LAlt')
+*RAlt:: AltDown('RAlt')
+
 ; Alt keyup events
-*LAlt Up:: {
-    Send '{Blind}{LAlt up}'
-    if A_PriorHotkey == '*LAlt' && (A_PriorKey == 'LAlt' || A_PriorKey == '')
-        SetIME(0)
-}
-*RAlt Up:: {
-    Send '{Blind}{RAlt up}'
-    if A_PriorHotkey == '*RAlt' && (A_PriorKey == 'RAlt' || A_PriorKey == '')
-        SetIME(1)
-}
+*LAlt Up:: AltUp('LAlt', 'LAlt', 0)
+*RAlt Up:: AltUp('RAlt', 'RAlt', 1)
 
 ; Suppress katakana mode while suspended
 #SuspendExempt

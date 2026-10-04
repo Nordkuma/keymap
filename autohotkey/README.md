@@ -47,27 +47,22 @@ excluded = [
 ## Features
 
 ### Esc key
-The key to the left of `1` sends `Esc`.
-
-| Layout | Key                 | Action                             |
-| ------ | ------------------- | ---------------------------------- |
-| US     | `` ` ``             | `Esc` (outside the CapsLock layer) |
-| JIS    | `Hankaku / Zenkaku` | `Esc` (always)                     |
+`` ` `` sends `Esc` outside the CapsLock layer.
 
 ### CapsLock layer
 Hold CapsLock to activate a layer of shortcuts.
 
-| Key                                 | Action                    |
-| ----------------------------------- | ------------------------- |
-| `` ` `` (US)                        | `` ` ``                   |
-| `1`–`0`, `-`, `=` (US) / `^` (JIS) | `F1`–`F12`               |
-| `Backspace`                         | `Del`                     |
-| `H` / `J` / `K` / `L`               | `←` / `↓` / `↑` / `→` |
-| `Y` / `O`                           | `Home` / `End`            |
-| `U` / `I`                           | `Ctrl+End` / `Ctrl+Home`  |
-| `M` / `,`                           | `PgDn` / `PgUp`           |
-| `Space`                             | `Esc`                     |
-| Most other keys                     | `Ctrl` + key              |
+| Key                   | Action                    |
+| --------------------- | ------------------------- |
+| `` ` ``               | `` ` ``                   |
+| `1`–`0`, `-`, `=`    | `F1`–`F12`               |
+| `Backspace`           | `Del`                     |
+| `H` / `J` / `K` / `L` | `←` / `↓` / `↑` / `→` |
+| `Y` / `O`             | `Home` / `End`            |
+| `U` / `I`             | `Ctrl+End` / `Ctrl+Home`  |
+| `M` / `,`             | `PgDn` / `PgUp`           |
+| `Space`               | `Esc`                     |
+| Most other keys       | `Ctrl` + key              |
 
 ### Alt IME control
 Tapping Alt switches the IME state.
@@ -76,6 +71,8 @@ Tapping Alt switches the IME state.
 | ---------- | ------- |
 | `LAlt` tap | IME off |
 | `RAlt` tap | IME on  |
+
+On JIS keyboards, `Muhenkan` acts as `LAlt` and `Henkan` / `Kana` act as `RAlt` (see [JIS layout](#jis-layout)).
 
 The script also accepts IME commands from the [`ime`](../ime/README.md) CLI tool via a hidden window.
 
@@ -88,12 +85,27 @@ While suspended, `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the 
 Use **Register Excluded Keyboard...** in the tray menu to detect and register a keyboard interactively.
 
 ## JIS layout
-On JIS keyboards, CapsLock may not work correctly as a layer key.
-As a workaround, remap CapsLock to F24 at the OS level using the registry files in [reg/](reg/):
+JIS keyboards are used as US keyboards.
+Set the Windows hardware keyboard layout to **English keyboard (101/102 keys)** (Settings > Time & language > Language & region > Japanese > Options > Keyboard layout), reboot, then set `layout = "JIS"` in `config.toml`.
+
+### Key remapping
+With the English layout, every key types the character printed on a US keyboard at the same position, including shortcuts with modifiers.
+The JIS-specific keys are remapped as follows:
+
+| Key               | Action      |
+| ----------------- | ----------- |
+| `¥`               | `Backspace` |
+| `\`               | `RShift`    |
+| `Muhenkan`        | `LAlt`      |
+| `Henkan` / `Kana` | `RAlt`      |
+| `AppsKey`         | `RWin`      |
+
+### CapsLock
+If CapsLock does not work correctly as a layer key on a JIS keyboard, remap CapsLock to F24 at the OS level using the registry files in [reg/](reg/):
 
 * `reg/set-scancode-map.reg`: Remaps CapsLock to F24
 * `reg/remove-scancode-map.reg`: Reverts the remapping
 
-Apply the `.reg` file and reboot, then set `layout = "JIS"` in `config.toml`.
+Apply the `.reg` file and reboot.
 
 > **Note:** Modifying the registry is done at your own risk. Back up the registry before applying.

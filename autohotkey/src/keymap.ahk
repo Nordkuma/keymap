@@ -6,5 +6,4 @@
 #Include layout.ahk
 #Include alt-ime.ahk
 #Include caps-layer.ahk
-#Include layout-us.ahk
 #Include layout-jis.ahk

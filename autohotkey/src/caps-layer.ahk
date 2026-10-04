@@ -1,5 +1,9 @@
 #Requires AutoHotkey v2.0
 
+#HotIf !IsLayerActive()
+`:: Send '{Esc}'
+#HotIf
+
 #HotIf IsLayerActive()
 ; Number row
 1:: Send '{F1}'
@@ -13,7 +17,7 @@
 9:: Send '{F9}'
 0:: Send '{F10}'
 -:: Send '{F11}'
-sc00D:: Send '{F12}' ; "=" (US) / "^" (JIS)
+=:: Send '{F12}'
 Backspace:: Send '{Del}'
 ; Top row (QWERTY)
 q:: Send '^q'
