@@ -92,7 +92,9 @@ This is useful for keyboards with firmware-level remapping (e.g. QMK/VIA).
 
 Use **Register Excluded Keyboard...** in the tray menu to detect and register a keyboard interactively.
 
-> While suspended, `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the IME does not switch to katakana input mode.
+> While suspended, the following keys are still handled:
+> * `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the IME does not switch to katakana input mode.
+> * Tapping `LAlt` / `RAlt` does not activate the window menu bar.
 
 ### Search selected text
 Press `Win` + `Shift` + `Q` to look up the selected text.

@@ -66,9 +66,11 @@ AltUp(key, alt, ime) {
 *LAlt Up:: AltUp('LAlt', 'LAlt', 0)
 *RAlt Up:: AltUp('RAlt', 'RAlt', 1)
 
-; Suppress katakana mode while suspended
+; Suppress katakana mode and Alt menu while suspended
 #SuspendExempt
 #HotIf A_IsSuspended
 +vk16:: Send '{vk16}' ; Shift + VK_IME_ON
+~*LAlt:: Send '{Blind}{vkE8}'
+~*RAlt:: Send '{Blind}{vkE8}'
 #HotIf
 #SuspendExempt False
