@@ -1,7 +1,5 @@
 #Requires AutoHotkey v2.0
 
-#SingleInstance Force
-
 ; Get selected text
 GetSelected() {
     backup := ClipboardAll()
@@ -51,7 +49,7 @@ URLEncode(text) {
 }
 
 ; Open URL or search with DuckDuckGo, then activate the Edge window
-#+q:: {
+SearchSelected() {
     text := Trim(GetSelected())
 
     if (text == '')
@@ -66,3 +64,7 @@ URLEncode(text) {
     Sleep 500
     WinActivate 'ahk_exe msedge.exe'
 }
+
+#SuspendExempt
+#+q:: SearchSelected()
+#SuspendExempt False

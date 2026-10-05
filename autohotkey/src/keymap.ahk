@@ -6,3 +6,4 @@
 #Include alt-ime.ahk
 #Include layer.ahk
 #Include layout.ahk
+#Include search-selected.ahk
