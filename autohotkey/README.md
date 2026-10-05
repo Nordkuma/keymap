@@ -18,7 +18,7 @@ install.bat
 `config.toml` is copied only if it does not already exist, to preserve your settings.
 
 ## Usage
-Run `launcher.ahk` to start all scripts.
+Run `keymap.ahk` to start the script.
 Running as administrator is recommended to ensure hotkeys work in elevated windows.
 
 Right-click the tray icon to access the following options:
@@ -46,8 +46,17 @@ excluded = [
 
 ## Features
 
-### Esc key
-`` ` `` sends `Esc` outside the CapsLock layer.
+### Alt IME control
+Tapping Alt switches the IME state.
+
+| Key        | Action  |
+| ---------- | ------- |
+| `LAlt` tap | IME off |
+| `RAlt` tap | IME on  |
+
+On JIS keyboards, `Muhenkan` acts as `LAlt` and `Henkan` / `Kana` act as `RAlt` (see [JIS layout](#jis-layout)).
+
+The script also accepts IME commands from the [`ime`](../ime/README.md) CLI tool via a hidden window.
 
 ### CapsLock layer
 Hold CapsLock to activate a layer of shortcuts.
@@ -64,25 +73,36 @@ Hold CapsLock to activate a layer of shortcuts.
 | `Space`               | `Esc`                     |
 | Most other keys       | `Ctrl` + key              |
 
-### Alt IME control
-Tapping Alt switches the IME state.
+`` ` `` sends `Esc` outside the CapsLock layer.
 
-| Key        | Action  |
-| ---------- | ------- |
-| `LAlt` tap | IME off |
-| `RAlt` tap | IME on  |
+### AppsKey layer
+Hold `AppsKey` to control media, brightness and volume. `AppsKey` itself is disabled.
 
-On JIS keyboards, `Muhenkan` acts as `LAlt` and `Henkan` / `Kana` act as `RAlt` (see [JIS layout](#jis-layout)).
-
-The script also accepts IME commands from the [`ime`](../ime/README.md) CLI tool via a hidden window.
+| Key       | Action                |
+| --------- | --------------------- |
+| `P` / `]` | Previous / next track |
+| `[`       | Play / pause          |
+| `;` / `'` | Brightness down / up  |
+| `,`       | Mute                  |
+| `.` / `/` | Volume down / up      |
 
 ### Device exclusion
 When any keyboard in `excluded` is connected, all hotkey remapping is suspended automatically.
 This is useful for keyboards with firmware-level remapping (e.g. QMK/VIA).
 
-While suspended, `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the IME does not switch to katakana input mode.
-
 Use **Register Excluded Keyboard...** in the tray menu to detect and register a keyboard interactively.
+
+> While suspended, `Shift` + `VK_IME_ON` is sent as plain `VK_IME_ON` so that the IME does not switch to katakana input mode.
+
+### Search selected text
+Press `Win` + `Shift` + `Q` to look up the selected text.
+
+| Selected text | Action                 |
+| ------------- | ---------------------- |
+| URL           | Open the URL           |
+| Other text    | Search with DuckDuckGo |
+
+The Edge window is activated afterwards. This keeps working while remapping is suspended by device exclusion.
 
 ## JIS layout
 JIS keyboards are used as US keyboards.
@@ -98,14 +118,3 @@ The JIS-specific keys are remapped as follows:
 | `\`               | `RShift`    |
 | `Muhenkan`        | `LAlt`      |
 | `Henkan` / `Kana` | `RAlt`      |
-| `AppsKey`         | `RWin`      |
-
-### CapsLock
-If CapsLock does not work correctly as a layer key on a JIS keyboard, remap CapsLock to F24 at the OS level using the registry files in [reg/](reg/):
-
-* `reg/set-scancode-map.reg`: Remaps CapsLock to F24
-* `reg/remove-scancode-map.reg`: Reverts the remapping
-
-Apply the `.reg` file and reboot.
-
-> **Note:** Modifying the registry is done at your own risk. Back up the registry before applying.
