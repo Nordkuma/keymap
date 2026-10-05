@@ -3,7 +3,6 @@
 #SingleInstance Force
 
 #Include config.ahk
-#Include layout.ahk
 #Include alt-ime.ahk
-#Include caps-layer.ahk
-#Include layout-jis.ahk
+#Include layer.ahk
+#Include layout.ahk
