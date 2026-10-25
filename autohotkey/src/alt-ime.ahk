@@ -3,6 +3,9 @@
 ; Mask Alt keyup event
 A_MenuMaskKey := 'vkE8'
 
+; Max wait for the IME window in ms
+IME_TIMEOUT := 300
+
 ; Create a hidden window for external IME control
 global g_imcGui := Gui()
 g_imcGui.Title := 'IMEControllerAHK'
@@ -13,13 +16,14 @@ OnMessage(IMECTL_MSG, IMECtlMessage)
 
 ; Set IME state
 SetIME(on) {
+    global IME_TIMEOUT
     hwnd := WinExist('A')
 
     if !hwnd
         return
 
     ptr := A_PtrSize
-    size := 24 + (ptr * 6)  ; 4 + 4 + (ptr * 6) + 16
+    size := 24 + (ptr * 6)
     gti := Buffer(size, 0)
 
     NumPut('UInt', size, gti, 0)
@@ -33,7 +37,8 @@ SetIME(on) {
     ime := DllCall('imm32\ImmGetDefaultIMEWnd', 'Ptr', hwnd, 'Ptr')
 
     if (ime)
-        DllCall('SendMessage', 'Ptr', ime, 'UInt', 0x0283, 'Ptr', 0x0006, 'Ptr', on ? 1 : 0)
+        DllCall('SendMessageTimeout', 'Ptr', ime, 'UInt', 0x0283, 'Ptr', 0x0006, 'Ptr', on ? 1 : 0,
+            'UInt', 0x0002, 'UInt', IME_TIMEOUT, 'Ptr', 0)  ; SMTO_ABORTIFHUNG
 }
 
 ; Set IME state from command
